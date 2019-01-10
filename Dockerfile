@@ -1,5 +1,8 @@
 FROM centos:7
-MAINTAINER Mats Rynge "rynge@isi.edu"
+MAINTAINER Benedikt Riedel "briedel@icecube.wisc.edu"
+# Mostly taken from OSG EL7 Docker image
+# Modifications to accomodate new CUDA versions
+# and pyglidein
 
 RUN yum -y upgrade
 RUN yum -y install epel-release yum-plugin-priorities
@@ -8,7 +11,7 @@ RUN yum -y install epel-release yum-plugin-priorities
 RUN yum -y install http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
    
 # pegasus repo 
-RUN echo -e "# Pegasus\n[Pegasus]\nname=Pegasus\nbaseurl=http://download.pegasus.isi.edu/wms/download/rhel/7/\$basearch/\ngpgcheck=0\nenabled=1\npriority=50" >/etc/yum.repos.d/pegasus.repo
+# RUN echo -e "# Pegasus\n[Pegasus]\nname=Pegasus\nbaseurl=http://download.pegasus.isi.edu/wms/download/rhel/7/\$basearch/\ngpgcheck=0\nenabled=1\npriority=50" >/etc/yum.repos.d/pegasus.repo
 
 # well rounded basic system to support a wide range of user jobs
 RUN yum -y groups mark convert \
@@ -99,7 +102,7 @@ RUN yum -y install osg-ca-certs osg-wn-client \
 RUN yum -y install condor
 
 # pegasus
-RUN yum -y install pegasus
+# RUN yum -y install pegasus
 
 # Cleaning caches to reduce size of image
 RUN yum clean all
@@ -115,6 +118,7 @@ RUN for MNTPOINT in \
         /xenon \
         /spt \
         /stash2 \
+        /pyglidein \
     ; do \
         mkdir -p $MNTPOINT ; \
     done
