@@ -139,15 +139,18 @@ RUN cd / && \
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 
+RUN cd /pyglidein
 
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/glidein_start.sh /scratch/glidein_start.sh
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/os_arch.sh /scratch/os_arch.sh
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/log_shipper.sh /scratch/log_shipper.sh
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/clsim_gpu_test.py /scratch/clsim_gpu_test.py
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/cvmfs_test.py /scratch/cvmfs_test.py
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/gridftp_test.py /scratch/gridftp_test.py
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
-COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
+RUN git clone https://github.com/WIPACrepo/pyglidein.git
+
+COPY /pyglidein/pyglidein/glidein_start.sh /scratch/glidein_start.sh
+COPY /pyglidein/pyglidein/os_arch.sh /scratch/os_arch.sh
+COPY /pyglidein/pyglidein/log_shipper.sh /scratch/log_shipper.sh
+COPY /pyglidein/pyglidein/startd_cron_scripts/clsim_gpu_test.py /scratch/clsim_gpu_test.py
+COPY /pyglidein/pyglidein/startd_cron_scripts/cvmfs_test.py /scratch/cvmfs_test.py
+COPY /pyglidein/pyglidein/startd_cron_scripts/gridftp_test.py /scratch/gridftp_test.py
+COPY /pyglidein/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
+COPY /pyglidein/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
 
 RUN cd /scratch
 
