@@ -119,6 +119,7 @@ RUN for MNTPOINT in \
         /spt \
         /stash2 \
         /pyglidein \
+        /scratch \
     ; do \
         mkdir -p $MNTPOINT ; \
     done
@@ -138,3 +139,18 @@ RUN cd / && \
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 
+
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/glidein_start.sh /scratch/glidein_start.sh
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/os_arch.sh /scratch/os_arch.sh
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/log_shipper.sh /scratch/log_shipper.sh
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/clsim_gpu_test.py /scratch/clsim_gpu_test.py
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/cvmfs_test.py /scratch/cvmfs_test.py
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/gridftp_test.py /scratch/gridftp_test.py
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
+COPY /global/homes/b/briedel/icecube/pyglidein/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
+
+RUN cd /scratch
+
+RUN exec env -i CPUS=$CPUS GPUS=$GPUS MEMORY=$MEMORY DISK=$DISK WALLTIME=$WALLTIME DISABLE_STARTD_CHECKS=$DISABLE_STARTD_CHECKS SITE=$SITE ResourceName=ResourceName GLIDEIN_DIR=$HOME/icecube/pyglidein/pyglidein ./glidein_start.sh
+
+RUN rm -rf .
