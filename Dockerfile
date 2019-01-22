@@ -152,6 +152,8 @@ ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/start
 
 RUN echo $PWD
 
+RUN chmod -R 775 /scratch/*
+
 RUN exec env -i CPUS=$CPUS GPUS=$GPUS MEMORY=$MEMORY DISK=$DISK WALLTIME=$WALLTIME DISABLE_STARTD_CHECKS=$DISABLE_STARTD_CHECKS SITE=$SITE ResourceName=ResourceName GLIDEIN_DIR=$HOME/icecube/pyglidein/pyglidein /scratch/glidein_start.sh
 
 RUN rm -rf .
