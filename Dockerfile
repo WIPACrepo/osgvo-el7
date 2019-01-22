@@ -150,7 +150,8 @@ ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/start
 ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
 ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
 
+RUN echo $PWD
 
-RUN exec env -i CPUS=$CPUS GPUS=$GPUS MEMORY=$MEMORY DISK=$DISK WALLTIME=$WALLTIME DISABLE_STARTD_CHECKS=$DISABLE_STARTD_CHECKS SITE=$SITE ResourceName=ResourceName GLIDEIN_DIR=$HOME/icecube/pyglidein/pyglidein ./glidein_start.sh
+RUN exec env -i CPUS=$CPUS GPUS=$GPUS MEMORY=$MEMORY DISK=$DISK WALLTIME=$WALLTIME DISABLE_STARTD_CHECKS=$DISABLE_STARTD_CHECKS SITE=$SITE ResourceName=ResourceName GLIDEIN_DIR=$HOME/icecube/pyglidein/pyglidein /scratch/glidein_start.sh
 
 RUN rm -rf .
