@@ -139,22 +139,17 @@ RUN cd / && \
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 
-RUN cd /pyglidein
-
-RUN git clone https://github.com/WIPACrepo/pyglidein.git
-
-RUN ls /pyglidein/pyglidein
-
-COPY /pyglidein/pyglidein/glidein_start.sh /scratch/glidein_start.sh
-COPY /pyglidein/pyglidein/os_arch.sh /scratch/os_arch.sh
-COPY /pyglidein/pyglidein/log_shipper.sh /scratch/log_shipper.sh
-COPY /pyglidein/pyglidein/startd_cron_scripts/clsim_gpu_test.py /scratch/clsim_gpu_test.py
-COPY /pyglidein/pyglidein/startd_cron_scripts/cvmfs_test.py /scratch/cvmfs_test.py
-COPY /pyglidein/pyglidein/startd_cron_scripts/gridftp_test.py /scratch/gridftp_test.py
-COPY /pyglidein/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
-COPY /pyglidein/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
-
 RUN cd /scratch
+
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/glidein_start.sh /scratch/glidein_start.sh
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/os_arch.sh /scratch/os_arch.sh
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/log_shipper.sh /scratch/log_shipper.sh
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/clsim_gpu_test.py /scratch/clsim_gpu_test.py
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/cvmfs_test.py /scratch/cvmfs_test.py
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/gridftp_test.py /scratch/gridftp_test.py
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/post_cvmfs.sh /scratch/post_cvmfs.sh
+ADD https://raw.githubusercontent.com/WIPACrepo/pyglidein/master/pyglidein/startd_cron_scripts/pre_cvmfs.sh /scratch/pre_cvmfs.sh
+
 
 RUN exec env -i CPUS=$CPUS GPUS=$GPUS MEMORY=$MEMORY DISK=$DISK WALLTIME=$WALLTIME DISABLE_STARTD_CHECKS=$DISABLE_STARTD_CHECKS SITE=$SITE ResourceName=ResourceName GLIDEIN_DIR=$HOME/icecube/pyglidein/pyglidein ./glidein_start.sh
 
