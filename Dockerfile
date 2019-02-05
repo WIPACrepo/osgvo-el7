@@ -59,8 +59,10 @@ RUN yum -y install \
            numpy \
            octave \
            octave-devel \
-           osg-wn-client \
+           openssh \
+           openssh-server \
            openssl098e \
+           osg-wn-client \
            p7zip \
            p7zip-plugins \
            python-astropy \
@@ -69,6 +71,7 @@ RUN yum -y install \
            redhat-lsb-core \
            rsync \
            scipy \
+           stashcache-client \
            subversion \
            tcl-devel \
            tcsh \
@@ -77,23 +80,9 @@ RUN yum -y install \
            wget \
            which
 
-# Cuda and cudnn - in case we land on GPU nodes. See:
-#  https://developer.nvidia.com/cuda-downloads
-#  https://gitlab.com/nvidia/cuda/blob/centos7/9.0/devel/cudnn7/Dockerfile
-RUN rpm -Uvh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.0.176-1.x86_64.rpm \
-    && yum -y clean all \
-    && yum -y install cuda-9-1 \
-    && cd /usr/local \
-    && curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v7.0.5/cudnn-9.1-linux-x64-v7.tgz -O \
-    && tar --no-same-owner -xzf cudnn-9.1-linux-x64-v7.tgz -C /usr/local \
-    && rm -f cudnn-9.1-linux-x64-v7.tgz \
-    && ldconfig
-
 # osg
-# use CA certs from CVMFS
 RUN yum -y install osg-ca-certs osg-wn-client \
-    && mv /etc/grid-security/certificates /etc/grid-security/certificates.osg-ca-certs \
-    && ln -f -s /cvmfs/oasis.opensciencegrid.org/mis/certificates /etc/grid-security/certificates
+    && rm -f /etc/grid-security/certificates/*.r0
 
 # htcondor - include so we can chirp
 RUN yum -y install condor
