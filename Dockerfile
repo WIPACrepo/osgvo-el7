@@ -78,6 +78,7 @@ RUN yum -y install \
            time \
            tk-devel \
            wget \
+           opencl \
            which
 
 # osg
@@ -123,3 +124,12 @@ RUN cd / && \
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 
+RUN wget http://registrationcenter-download.intel.com/akdlm/irc_nas/vcp/13793/l_opencl_p_18.1.0.013.tgz
+
+RUN tar -xzf l_opencl_p_18.1.0.013.tgz
+
+RUN ls
+
+COPY ./silent.cfg /l_opencl_p_18.1.0.013/silent_usr.cfg
+
+RUN cd l_opencl_p_18.1.0.013 && ls && ./install.sh -s silent_usr.cfg
