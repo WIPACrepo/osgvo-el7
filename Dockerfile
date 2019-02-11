@@ -79,6 +79,7 @@ RUN yum -y install \
            tk-devel \
            wget \
            opencl \
+           opencl-headers \
            which
 
 # osg
