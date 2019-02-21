@@ -81,6 +81,7 @@ RUN yum -y install \
            opencl \
            opencl-headers \
            libnuma \
+           numactl-libs \
            which
 
 # osg
