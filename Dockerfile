@@ -80,7 +80,7 @@ RUN yum -y install \
            wget \
            opencl \
            opencl-headers \
-           libnuma
+           libnuma \
            which
 
 # osg
