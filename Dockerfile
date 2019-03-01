@@ -98,14 +98,14 @@ RUN yum clean all
 # required directories
 RUN for MNTPOINT in \
         /cvmfs \
-        /hadoop \
-        /hdfs \
-        /lizard \
-        /mnt/hadoop \
-        /mnt/hdfs \
-        /xenon \
-        /spt \
-        /stash2 \
+#         /hadoop \
+#         /hdfs \
+#         /lizard \
+#         /mnt/hadoop \
+#         /mnt/hdfs \
+#         /xenon \
+#         /spt \
+#         /stash2 \
     ; do \
         mkdir -p $MNTPOINT ; \
     done
