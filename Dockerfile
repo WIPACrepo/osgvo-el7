@@ -98,6 +98,7 @@ RUN yum clean all
 # required directories
 RUN for MNTPOINT in \
         /cvmfs \
+        /scratch \
 #         /hadoop \
 #         /hdfs \
 #         /lizard \
