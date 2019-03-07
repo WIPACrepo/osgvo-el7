@@ -99,6 +99,7 @@ RUN yum clean all
 RUN for MNTPOINT in \
         /cvmfs \
         /scratch_icecube \
+        /tmp_icecube \
 #         /hadoop \
 #         /hdfs \
 #         /lizard \
