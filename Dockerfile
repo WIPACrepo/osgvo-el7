@@ -127,6 +127,7 @@ RUN cd / && \
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 
+RUN echo "Timestamp:" `date --utc`
 # RUN wget http://registrationcenter-download.intel.com/akdlm/irc_nas/vcp/13793/l_opencl_p_18.1.0.013.tgz
 
 # RUN tar -xzf l_opencl_p_18.1.0.013.tgz
