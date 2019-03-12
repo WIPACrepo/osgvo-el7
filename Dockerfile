@@ -1,4 +1,5 @@
-FROM centos:7
+FROM nvidia/cuda:10.1-cudnn7-devel-centos7
+# FROM centos:7
 MAINTAINER Mats Rynge "rynge@isi.edu"
 
 RUN yum -y upgrade
