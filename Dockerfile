@@ -25,6 +25,7 @@ RUN yum -y install \
            binutils-devel \
            coreutils \
            curl \
+           cyrus-sasl-devel \
            fontconfig \
            gcc \
            gcc-c++ \
